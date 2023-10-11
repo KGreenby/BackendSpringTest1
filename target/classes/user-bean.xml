@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<bean id="userdaoImpl" class="myspring.di.strategy1.dao.UserDaoImpl"/>
+	
+	<bean id="userService" class="myspring.di.strategy1.service.UserServiceImpl">
+		<property name="userdao" ref="userdaoImpl"></property> 
+		<!-- property의 래퍼런스 이름은 빈의 해당 빈의 id와 같아야 한다 -->
+	</bean>
+
+</beans>
