@@ -16,5 +16,33 @@
 		p:username="${db.username}"
 		p:password="${db.password}"
 	/>
+	
+	<!-- myBatis-spring의 sqlSessionFactoryBean을 springBean으로 등록 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:myBatis/SqlMapConfig.xml"/>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:myBatis/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- myBatis-spring의 sqlSessionTemple -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<!-- 기본생성자가 없다 라는 오류가 뜸 -->
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	
+	<!-- myBatis-spring의 MapperScannerConfigurer을 springBean으로 등록  -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="myspring.user.dao.mapper"/>
+		<property name="sqlSessionTemplateBeanName" value="sqlSession"/>
+	</bean>
+	
+	<!-- DAO Service Bean Scanning -->
+	<context:component-scan base-package="myspring.user">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 
 </beans>

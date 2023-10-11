@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello 스프링</h1>
+	<h1>사용자 관리 메인</h1>
+	<ul>
+		<li><a href="userList.do">UserList</a></li>
+	</ul>
 </body>
 </html>
